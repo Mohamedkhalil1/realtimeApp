@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Model;
-
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -9,18 +8,27 @@ class Question extends Model
 {
     //
 
-    public function user()
-    {
-        $this->belongsTo(User::class);
+    public function getRouteKeyName(){
+        return 'slug';
     }
 
+    protected $guarded =[];
+    
+    public function user(){
+        return $this->belongsTo(User::class,'user_id');
+    }
     public function reply()
     {
-        $this->hasMany(Reply::class);
+        return $this->hasMany(Reply::class);
     }
 
     public function category()
     {
-        $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
+    }
+
+    public function getPathAttribute()
+    {
+        return asset("api/question/".$this->slug);
     }
 }

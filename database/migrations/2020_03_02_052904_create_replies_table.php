@@ -17,8 +17,14 @@ class CreateRepliesTable extends Migration
             $table->bigIncrements('id');
             $table->text('body');
             $table->integer('question_id')->unsigned();
-            $table->integer('user_id')->unsigned();
-           
+
+            $table->bigInteger('user_id')
+            ->unsigned()->nullable();
+            $table->foreign('user_id')
+            ->references('id')
+            ->on('users')
+            ->onDelete('cascade');
+            
             $table->timestamps();
         });
     }
