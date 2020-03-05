@@ -34,6 +34,7 @@ Vue.component('AppHome', require('./components/AppHome.vue').default);
 const vuetify = new Vuetify();
 
 import router from './Router/router.js'
+
 const app = new Vue({
     el: '#app',
     vuetify,
